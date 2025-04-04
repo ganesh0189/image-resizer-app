@@ -1,0 +1,22 @@
+Test Report - 2025-04-03 15:30:08
+==================================================
+
+Total Tests Run: 9
+Failures: 2
+Errors: 0
+
+Failures:
+
+test_file_too_large (test_app.TestImageResizerApp.test_file_too_large)
+Traceback (most recent call last):
+  File "/Users/ganeshbollem/Documents/image-resizer-app/tests/test_app.py", line 67, in test_file_too_large
+    self.assertEqual(response.status_code, 413)
+AssertionError: 200 != 413
+
+
+test_unexpected_error (test_app.TestImageResizerApp.test_unexpected_error)
+Traceback (most recent call last):
+  File "/Users/ganeshbollem/Documents/image-resizer-app/tests/test_app.py", line 141, in test_unexpected_error
+    self.assertEqual(response.status_code, 500)
+AssertionError: 404 != 500
+

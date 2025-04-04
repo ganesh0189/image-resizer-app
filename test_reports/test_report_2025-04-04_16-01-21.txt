@@ -1,0 +1,39 @@
+Test Report - 2025-04-04_16-01-21
+==================================================
+
+Total Tests Run: 15
+Successful: 11
+Failed: 4
+Errors: 0
+Run Time: 0:00:00.239315
+
+Failed Tests:
+--------------------
+test_file_too_large (test_app.TestImageResizerApp.test_file_too_large)
+Traceback (most recent call last):
+  File "/Users/ganeshbollem/Documents/image-resizer-app/tests/test_app.py", line 118, in test_file_too_large
+    self.assertEqual(response.status_code, 413)
+AssertionError: 400 != 413
+
+
+test_unexpected_error (test_app.TestImageResizerApp.test_unexpected_error)
+Traceback (most recent call last):
+  File "/Users/ganeshbollem/Documents/image-resizer-app/tests/test_app.py", line 124, in test_unexpected_error
+    self.assertEqual(response.status_code, 500)
+AssertionError: 404 != 500
+
+
+test_convert_to_pdf_success (test_pdf.TestPDFConversion.test_convert_to_pdf_success)
+Traceback (most recent call last):
+  File "/Users/ganeshbollem/Documents/image-resizer-app/tests/test_pdf.py", line 149, in test_convert_to_pdf_success
+    self.assertTrue(os.path.exists(pdf_path))
+AssertionError: False is not true
+
+
+test_convert_to_pdf_with_invalid_order (test_pdf.TestPDFConversion.test_convert_to_pdf_with_invalid_order)
+Traceback (most recent call last):
+  File "/Users/ganeshbollem/Documents/image-resizer-app/tests/test_pdf.py", line 158, in test_convert_to_pdf_with_invalid_order
+    self.assertEqual(response.status_code, 400)
+AssertionError: 200 != 400
+
+

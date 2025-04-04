@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Convert Images to PDF{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="tool-header">
+        <h1>Convert Images to PDF</h1>
+        <p class="subtitle">Upload multiple images and convert them into a single PDF file</p>
+    </div>
+
+    <form id="pdf-form" action="{{ url_for('routes.convert_to_pdf') }}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="pdf-name">PDF Name</label>
+            <input type="text" id="pdf-name" name="pdf_name" class="form-control" placeholder="Enter PDF name (optional)">
+        </div>
+
+        <div class="pdf-upload-area" id="pdf-upload-area">
+            <input type="file" id="pdf-file-input" name="files" multiple accept="image/*" class="file-input" style="display: none;">
+            <div class="upload-content">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Drag and drop images here or click to select</p>
+                <p class="upload-hint">Supported formats: JPG, PNG, GIF, WebP</p>
+                <p class="upload-hint">Maximum file size: 10MB per image</p>
+            </div>
+        </div>
+
+        <div class="pdf-preview-container" id="pdf-preview-container" style="display: none;">
+            <div class="preview-header">
+                <h3>Selected Images</h3>
+                <button type="button" class="add-more-btn" onclick="document.getElementById('pdf-file-input').click()">
+                    <i class="fas fa-plus"></i> Add More Images
+                </button>
+            </div>
+            <div class="preview-hint">Drag images to reorder them in the PDF</div>
+            <div class="image-preview-list" id="image-list"></div>
+            <div class="pdf-actions">
+                <button type="submit" class="convert-btn">
+                    <i class="fas fa-file-pdf"></i>
+                    <span class="btn-text">Convert to PDF</span>
+                    <span class="loading-spinner"></span>
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Result Modal -->
+    <div id="pdf-result-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>PDF Created Successfully!</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="result-info">
+                    <p>File name: <span class="pdf-name">-</span></p>
+                    <p>Pages: <span class="page-count">0</span></p>
+                    <p>File size: <span class="file-size">0 KB</span></p>
+                </div>
+                <div class="modal-actions">
+                    <a href="#" class="download-button" download>
+                        <i class="fas fa-download"></i> Download PDF
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+<script src="{{ url_for('static', filename='js/pdf.js') }}"></script>
+{% endblock %} 

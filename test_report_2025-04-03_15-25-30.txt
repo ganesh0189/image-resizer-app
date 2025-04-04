@@ -1,0 +1,15 @@
+Test Report - 2025-04-03 15:25:30
+==================================================
+
+Total Tests Run: 7
+Failures: 1
+Errors: 0
+
+Failures:
+
+test_index_page (test_app.TestImageResizerApp.test_index_page)
+Traceback (most recent call last):
+  File "/Users/ganeshbollem/Documents/image-resizer-app/tests/test_app.py", line 32, in test_index_page
+    self.assertEqual(response.status_code, 200)
+AssertionError: 500 != 200
+

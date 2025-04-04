@@ -1,0 +1,23 @@
+Test Report - 2025-04-04_16-23-21
+==================================================
+
+Total Tests Run: 15
+Successful: 14
+Failed: 1
+Errors: 0
+Run Time: 0:00:00.204466
+
+Failed Tests:
+--------------------
+test_convert_to_pdf_total_size_too_large (test_pdf.TestPDFConversion.test_convert_to_pdf_total_size_too_large)
+Traceback (most recent call last):
+  File "/Users/ganeshbollem/Documents/image-resizer-app/tests/test_pdf.py", line 121, in test_convert_to_pdf_total_size_too_large
+    self.assertEqual(json_data['error'], 'Total file size exceeds limit')
+AssertionError: 'Individual file size exceeds limit' != 'Total file size exceeds limit'
+- Individual file size exceeds limit
+? ^^^^^^^^
++ Total file size exceeds limit
+? ^^^
+
+
+

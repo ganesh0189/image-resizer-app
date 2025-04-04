@@ -1,0 +1,74 @@
+Test Report - 2025-04-04_10-12-25
+==================================================
+
+Total Tests Run: 15
+Successful: 6
+Failed: 9
+Errors: 0
+Run Time: 0:00:00.150125
+
+Failed Tests:
+--------------------
+test_compress_image_invalid_size (test_app.TestImageResizerApp.test_compress_image_invalid_size)
+Traceback (most recent call last):
+  File "/Users/ganeshbollem/Documents/image-resizer-app/tests/test_app.py", line 77, in test_compress_image_invalid_size
+    self.assertEqual(response.status_code, 400)
+AssertionError: 500 != 400
+
+
+test_compress_image_success (test_app.TestImageResizerApp.test_compress_image_success)
+Traceback (most recent call last):
+  File "/Users/ganeshbollem/Documents/image-resizer-app/tests/test_app.py", line 63, in test_compress_image_success
+    self.assertEqual(response.status_code, 200)
+AssertionError: 500 != 200
+
+
+test_unexpected_error (test_app.TestImageResizerApp.test_unexpected_error)
+Traceback (most recent call last):
+  File "/Users/ganeshbollem/Documents/image-resizer-app/tests/test_app.py", line 124, in test_unexpected_error
+    self.assertEqual(response.status_code, 404)
+AssertionError: 500 != 404
+
+
+test_convert_to_pdf_file_too_large (test_pdf.TestPDFConversion.test_convert_to_pdf_file_too_large)
+Traceback (most recent call last):
+  File "/Users/ganeshbollem/Documents/image-resizer-app/tests/test_pdf.py", line 62, in test_convert_to_pdf_file_too_large
+    self.assertEqual(response.status_code, 413)
+AssertionError: 500 != 413
+
+
+test_convert_to_pdf_invalid_file_type (test_pdf.TestPDFConversion.test_convert_to_pdf_invalid_file_type)
+Traceback (most recent call last):
+  File "/Users/ganeshbollem/Documents/image-resizer-app/tests/test_pdf.py", line 42, in test_convert_to_pdf_invalid_file_type
+    self.assertEqual(response.status_code, 400)
+AssertionError: 500 != 400
+
+
+test_convert_to_pdf_no_files (test_pdf.TestPDFConversion.test_convert_to_pdf_no_files)
+Traceback (most recent call last):
+  File "/Users/ganeshbollem/Documents/image-resizer-app/tests/test_pdf.py", line 32, in test_convert_to_pdf_no_files
+    self.assertEqual(response.status_code, 400)
+AssertionError: 500 != 400
+
+
+test_convert_to_pdf_success (test_pdf.TestPDFConversion.test_convert_to_pdf_success)
+Traceback (most recent call last):
+  File "/Users/ganeshbollem/Documents/image-resizer-app/tests/test_pdf.py", line 100, in test_convert_to_pdf_success
+    self.assertEqual(response.status_code, 200)
+AssertionError: 500 != 200
+
+
+test_convert_to_pdf_total_size_too_large (test_pdf.TestPDFConversion.test_convert_to_pdf_total_size_too_large)
+Traceback (most recent call last):
+  File "/Users/ganeshbollem/Documents/image-resizer-app/tests/test_pdf.py", line 85, in test_convert_to_pdf_total_size_too_large
+    self.assertEqual(response.status_code, 413)
+AssertionError: 500 != 413
+
+
+test_convert_to_pdf_with_invalid_order (test_pdf.TestPDFConversion.test_convert_to_pdf_with_invalid_order)
+Traceback (most recent call last):
+  File "/Users/ganeshbollem/Documents/image-resizer-app/tests/test_pdf.py", line 120, in test_convert_to_pdf_with_invalid_order
+    self.assertEqual(response.status_code, 400)
+AssertionError: 500 != 400
+
+

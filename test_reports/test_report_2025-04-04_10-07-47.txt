@@ -1,0 +1,31 @@
+Test Report - 2025-04-04_10-07-47
+==================================================
+
+Total Tests Run: 9
+Successful: 7
+Failed: 2
+Errors: 0
+Run Time: 0:00:00.065793
+
+Failed Tests:
+--------------------
+test_compress_image_success (test_app.TestImageResizerApp.test_compress_image_success)
+Traceback (most recent call last):
+  File "/Users/ganeshbollem/Documents/image-resizer-app/tests/test_app.py", line 100, in test_compress_image_success
+    self.assertEqual(response.content_type, 'image/jpeg')
+AssertionError: 'application/json' != 'image/jpeg'
+- application/json
++ image/jpeg
+
+
+
+test_resize_image_success (test_app.TestImageResizerApp.test_resize_image_success)
+Traceback (most recent call last):
+  File "/Users/ganeshbollem/Documents/image-resizer-app/tests/test_app.py", line 51, in test_resize_image_success
+    self.assertEqual(response.content_type, 'image/jpeg')
+AssertionError: 'application/json' != 'image/jpeg'
+- application/json
++ image/jpeg
+
+
+

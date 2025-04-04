@@ -1,0 +1,29 @@
+Test Report - 2025-04-04_10-06-37
+==================================================
+
+Total Tests Run: 1
+Successful: 0
+Failed: 0
+Errors: 1
+Run Time: 0:00:00.000243
+
+Errors:
+--------------------
+test_app (unittest.loader._FailedTest.test_app)
+ImportError: Failed to import test module: test_app
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/loader.py", line 396, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/loader.py", line 339, in _get_module_from_name
+    __import__(name)
+  File "/Users/ganeshbollem/Documents/image-resizer-app/tests/test_app.py", line 5, in <module>
+    from main import app
+  File "/Users/ganeshbollem/Documents/image-resizer-app/main.py", line 4, in <module>
+    from app.routes import init_routes
+  File "/Users/ganeshbollem/Documents/image-resizer-app/app/routes.py", line 4, in <module>
+    import img2pdf
+ModuleNotFoundError: No module named 'img2pdf'
+
+
+

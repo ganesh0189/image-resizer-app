@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Resize Image - Image Resizer{% endblock %}
+
+{% block content %}
+<div class="container">
+    <header class="header">
+        <h1 class="title">Resize Image</h1>
+        <p class="subtitle">Resize and compress your images</p>
+        <a href="{{ url_for('routes.index') }}" class="back-button">← Back to Home</a>
+    </header>
+
+    <div class="form-container">
+        <form action="{{ url_for('routes.resize') }}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <div class="file-upload">
+                    <label for="file-input" class="upload-area">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Click or drag image here</p>
+                        <p class="upload-hint">Supports: JPG, PNG, GIF, WebP</p>
+                    </label>
+                    <input type="file" id="file-input" name="file" class="file-input" accept="image/*" required>
+                    <div class="preview-container">
+                        <img src="" alt="Preview" class="image-preview">
+                        <button type="button" class="remove-file">&times;</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-options">
+                <div class="option-group">
+                    <h3>Resize Options</h3>
+                    <div class="form-group">
+                        <div style="display: flex; gap: 1rem;">
+                            <div style="flex: 1;">
+                                <label for="width">Width</label>
+                                <input type="number" id="width" name="width" class="text-input" min="1" placeholder="pixels">
+                            </div>
+                            <div style="flex: 1;">
+                                <label for="height">Height</label>
+                                <input type="number" id="height" name="height" class="text-input" min="1" placeholder="pixels">
+                            </div>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="maintain-aspect-ratio" name="maintain_aspect_ratio" checked>
+                            <label for="maintain-aspect-ratio">Maintain aspect ratio</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="option-group">
+                    <h3>Compress Options</h3>
+                    <div class="form-group">
+                        <label for="quality">Quality</label>
+                        <div class="slider-container">
+                            <input type="range" id="quality" name="quality" min="1" max="100" value="85" class="slider">
+                            <span class="quality-value">85%</span>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label for="target-size">Target Size (optional)</label>
+                        <input type="number" id="target-size" name="target_size" class="text-input" min="1" placeholder="Enter size in KB">
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-button">
+                <span>Process Image</span>
+                <div class="button-loader"></div>
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Result Modal -->
+<div class="result-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Image Processed</h2>
+            <button class="close-modal">&times;</button>
+        </div>
+        <div class="result-preview">
+            <img src="" alt="Processed Image">
+        </div>
+        <div class="result-info">
+            <div class="info-item">
+                <span>Original Size:</span>
+                <span class="original-size"></span>
+            </div>
+            <div class="info-item">
+                <span>New Size:</span>
+                <span class="new-size"></span>
+            </div>
+            <div class="info-item">
+                <span>Reduction:</span>
+                <span class="reduction"></span>
+            </div>
+        </div>
+        <a href="#" class="download-button" download>Download Image</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/process.js') }}"></script>
+{% endblock %} 

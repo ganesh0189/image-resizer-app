@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}Image Tools{% endblock %}
+
+{% block content %}
+<div class="container">
+    <header class="header">
+        <h1 class="title">Image Tools</h1>
+        <p class="subtitle">Free online tools for image manipulation</p>
+    </header>
+
+    <div class="features-container">
+        <div id="resize-card" class="feature-card">
+            <i class="fas fa-expand feature-icon"></i>
+            <h2>Resize Image</h2>
+            <p>Change image dimensions while maintaining quality</p>
+        </div>
+
+        <div id="pdf-card" class="feature-card">
+            <i class="fas fa-file-pdf feature-icon"></i>
+            <h2>Convert to PDF</h2>
+            <p>Convert multiple images into a single PDF file</p>
+        </div>
+    </div>
+</div>
+
+<!-- Resize Modal -->
+<div class="tool-modal" id="resize-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Resize Image</h2>
+            <button class="close-modal" data-modal="resize-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            {% include 'process.html' %}
+        </div>
+    </div>
+</div>
+
+<!-- PDF Modal -->
+<div class="tool-modal" id="pdf-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Convert to PDF</h2>
+            <button class="close-modal" data-modal="pdf-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            {% include 'pdf.html' %}
+        </div>
+    </div>
+</div>
+
+<!-- Stars Background -->
+<div class="stars">
+    {% for i in range(50) %}
+    <div class="star" style="left: {{ range(0, 100) | random }}%; top: {{ range(0, 100) | random }}%; width: {{ range(1, 3) | random }}px; height: {{ range(1, 3) | random }}px; animation-delay: {{ range(0, 2000) | random }}ms;"></div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Modal handling
+    const resizeCard = document.getElementById('resize-card');
+    const pdfCard = document.getElementById('pdf-card');
+    const resizeModal = document.getElementById('resize-modal');
+    const pdfModal = document.getElementById('pdf-modal');
+    const closeButtons = document.querySelectorAll('.close-modal');
+    const resultModal = document.querySelector('.result-modal');
+
+    resizeCard.addEventListener('click', () => {
+        resizeModal.style.display = 'flex';
+    });
+
+    pdfCard.addEventListener('click', () => {
+        pdfModal.style.display = 'flex';
+    });
+
+    closeButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const modalId = button.getAttribute('data-modal');
+            document.getElementById(modalId).style.display = 'none';
+            
+            // If closing the result modal, clear the form
+            if (modalId === 'resize-modal') {
+                const form = resizeModal.querySelector('form');
+                if (form) form.reset();
+                const previewContainer = resizeModal.querySelector('.preview-container');
+                if (previewContainer) previewContainer.style.display = 'none';
+                const uploadArea = resizeModal.querySelector('.upload-area');
+                if (uploadArea) uploadArea.style.display = 'flex';
+            }
+        });
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener('click', (e) => {
+        if (e.target === resizeModal) {
+            resizeModal.style.display = 'none';
+        }
+        if (e.target === pdfModal) {
+            pdfModal.style.display = 'none';
+        }
+    });
+
+    // Prevent closing when clicking inside modal content
+    document.querySelectorAll('.modal-content').forEach(content => {
+        content.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    });
+});
+</script>
+{% endblock %} 

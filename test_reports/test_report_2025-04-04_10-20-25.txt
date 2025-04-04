@@ -1,0 +1,37 @@
+Test Report - 2025-04-04_10-20-25
+==================================================
+
+Total Tests Run: 15
+Successful: 12
+Failed: 3
+Errors: 0
+Run Time: 0:00:00.197814
+
+Failed Tests:
+--------------------
+test_convert_to_pdf_file_too_large (test_pdf.TestPDFConversion.test_convert_to_pdf_file_too_large)
+Traceback (most recent call last):
+  File "/Users/ganeshbollem/Documents/image-resizer-app/tests/test_pdf.py", line 62, in test_convert_to_pdf_file_too_large
+    self.assertEqual(response.status_code, 413)
+AssertionError: 400 != 413
+
+
+test_convert_to_pdf_total_size_too_large (test_pdf.TestPDFConversion.test_convert_to_pdf_total_size_too_large)
+Traceback (most recent call last):
+  File "/Users/ganeshbollem/Documents/image-resizer-app/tests/test_pdf.py", line 87, in test_convert_to_pdf_total_size_too_large
+    self.assertEqual(json_data['error'], 'Total file size exceeds limit')
+AssertionError: 'File size exceeds limit' != 'Total file size exceeds limit'
+- File size exceeds limit
+? ^
++ Total file size exceeds limit
+? ^^^^^^^
+
+
+
+test_convert_to_pdf_with_invalid_order (test_pdf.TestPDFConversion.test_convert_to_pdf_with_invalid_order)
+Traceback (most recent call last):
+  File "/Users/ganeshbollem/Documents/image-resizer-app/tests/test_pdf.py", line 120, in test_convert_to_pdf_with_invalid_order
+    self.assertEqual(response.status_code, 400)
+AssertionError: 500 != 400
+
+
