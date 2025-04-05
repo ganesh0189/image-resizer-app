@@ -2,7 +2,9 @@ services:
   - type: web
     name: image-resizer-app
     env: python
-    buildCommand: pip install -r requirements.txt
+    buildCommand: |
+      pip install -r requirements.txt
+      mkdir -p uploads
     startCommand: gunicorn main:app
     envVars:
       - key: PYTHON_VERSION
@@ -10,4 +12,6 @@ services:
       - key: FLASK_ENV
         value: production
       - key: UPLOAD_FOLDER
-        value: /opt/render/project/src/uploads 
+        value: /opt/render/project/src/uploads
+      - key: FLASK_APP
+        value: main.py 
