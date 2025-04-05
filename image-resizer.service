@@ -1,0 +1,14 @@
+[Unit]
+Description=Image Resizer Application
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/image-resizer-app
+Environment="PATH=/var/www/image-resizer-app/venv/bin"
+Environment="FLASK_ENV=production"
+ExecStart=/var/www/image-resizer-app/venv/bin/gunicorn --config gunicorn_config.py 'app:create_app()'
+
+[Install]
+WantedBy=multi-user.target 
