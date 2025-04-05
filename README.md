@@ -1,24 +1,42 @@
 # Image Resizer and PDF Converter
 
-A Flask-based web application that allows users to resize images and convert multiple images to PDF.
+A modern, user-friendly web application built with Flask that allows users to resize images and convert multiple images to PDF. The application features a clean, intuitive interface with responsive design and real-time preview capabilities.
 
-## Features
+![Application Screenshot](app/static/images/screenshot.png)
 
-- Image Resizing
-  - Upload single or multiple images
-  - Specify custom dimensions
-  - Maintain aspect ratio
-  - Support for various image formats (JPG, PNG, etc.)
-  - Download resized images
+## 🌟 Features
 
-- PDF Conversion
-  - Convert multiple images to PDF
-  - Drag and drop interface
-  - Reorder images before conversion
-  - Custom PDF name
-  - Download converted PDF
+### Image Resizing
+- Upload single or multiple images with drag-and-drop support
+- Specify custom dimensions while maintaining aspect ratio
+- Support for various image formats (JPG, PNG, GIF, etc.)
+- Real-time preview of resized images
+- Batch processing for multiple images
+- Instant download of resized images
 
-## Setup
+### PDF Conversion
+- Convert multiple images to a single PDF document
+- Intuitive drag-and-drop interface for image upload
+- Reorder images before conversion
+- Custom PDF naming
+- High-quality PDF output
+- Instant download of converted PDF
+
+### User Interface
+- Modern, responsive design
+- Intuitive navigation
+- About section with application information
+- Creator details and contact information
+- Clean and professional header section
+- Transparent styling for a modern look
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Python 3.7 or higher
+- pip (Python package manager)
+
+### Local Development Setup
 
 1. Clone the repository:
 ```bash
@@ -26,7 +44,7 @@ git clone https://github.com/ganesh0189/image-resizer-app.git
 cd image-resizer-app
 ```
 
-2. Create a virtual environment and activate it:
+2. Create and activate a virtual environment:
 ```bash
 python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
@@ -42,19 +60,55 @@ pip install -r requirements.txt
 python main.py
 ```
 
-5. Open your browser and navigate to:
+5. Access the application:
 ```
-http://127.0.0.1:5000
+http://localhost:8080
 ```
 
-## Technologies Used
+## 🛠️ Technologies Used
 
-- Python
-- Flask
-- HTML/CSS/JavaScript
-- Pillow (Python Imaging Library)
-- img2pdf
+- **Backend:**
+  - Python
+  - Flask (Web Framework)
+  - Pillow (Image Processing)
+  - img2pdf (PDF Conversion)
 
-## License
+- **Frontend:**
+  - HTML5
+  - CSS3
+  - JavaScript
+  - Modern UI/UX Design
 
-MIT License 
+## 🌐 Deployment
+
+The application is deployed on Render and can be accessed at:
+```
+https://image-resizer-app.onrender.com
+```
+
+### Deployment Steps on Render
+1. Create a new Web Service on Render
+2. Connect your GitHub repository
+3. Configure the following settings:
+   - Build Command: `pip install -r requirements.txt`
+   - Start Command: `python main.py`
+   - Environment: Python 3
+4. Deploy the application
+
+## 👨‍💻 Creator
+
+**Ganesh Bollem**
+- GitHub: [ganesh0189](https://github.com/ganesh0189)
+- Email: ganeshbollem0189@gmail.com
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/ganesh0189/image-resizer-app/issues).
+
+## 📞 Support
+
+For support, please open an issue in the GitHub repository or contact the creator directly. 
