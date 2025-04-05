@@ -5,7 +5,8 @@ services:
     buildCommand: |
       pip install -r requirements.txt
       mkdir -p uploads
-    startCommand: gunicorn main:app
+      chmod 755 uploads
+    startCommand: gunicorn "app:create_app(Config)"
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.0
@@ -14,4 +15,6 @@ services:
       - key: UPLOAD_FOLDER
         value: /opt/render/project/src/uploads
       - key: FLASK_APP
-        value: main.py 
+        value: app
+      - key: SECRET_KEY
+        value: your-secret-key-here 

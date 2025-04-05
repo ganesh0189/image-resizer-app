@@ -6,7 +6,7 @@ class Config:
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))
     
     # Upload folder configuration
-    UPLOAD_FOLDER = os.path.join(tempfile.gettempdir(), 'image_resizer_uploads')
+    UPLOAD_FOLDER = os.environ.get('UPLOAD_FOLDER', os.path.join(tempfile.gettempdir(), 'image_resizer_uploads'))
     
     # File size limits
     MAX_CONTENT_LENGTH = 50 * 1024 * 1024  # 50MB total upload limit
@@ -15,11 +15,15 @@ class Config:
     # Allowed file extensions
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
     
-    # Debug mode
-    DEBUG = True
+    # Debug mode - set to False in production
+    DEBUG = os.environ.get('FLASK_ENV') != 'production'
     
     # Secret key for session management
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'dev-key-please-change-in-production'
+    SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-key-please-change-in-production')
+    
+    # Production settings
+    TESTING = False
+    PROPAGATE_EXCEPTIONS = True
 
 # Create uploads directory if it doesn't exist
 os.makedirs(Config.UPLOAD_FOLDER, exist_ok=True)

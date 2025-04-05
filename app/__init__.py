@@ -13,6 +13,10 @@ def create_app(config_class=Config):
     # Configure app
     app.config.from_object(config_class)
     
+    # Set production settings
+    app.config['DEBUG'] = False
+    app.config['TESTING'] = False
+    
     # Initialize routes and error handlers
     init_routes(app)
     
