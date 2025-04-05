@@ -19,7 +19,7 @@ class Config:
     DEBUG = os.environ.get('FLASK_ENV') != 'production'
     
     # Secret key for session management
-    SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-key-please-change-in-production')
+    SECRET_KEY = os.environ.get('SECRET_KEY', '678bcbacb43b90dfa4e0962f9cf1535b66be277b3ffd66094988eb0b56d93e31')
     
     # Production settings
     TESTING = False
