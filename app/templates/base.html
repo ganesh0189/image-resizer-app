@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/process.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/status.css') }}">
     
     {% block head %}{% endblock %}
 </head>
@@ -17,6 +19,18 @@
     <!-- Custom Cursor -->
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
+    
+    <!-- System Status Indicator -->
+    <div class="status-container">
+        <div class="status-indicator normal"></div>
+        <div>
+            <div class="status-text">System Normal</div>
+            <div class="wait-time" id="wait-time"></div>
+        </div>
+    </div>
+    
+    <!-- Queue Position Indicator -->
+    <div class="queue-position" id="queue-position"></div>
     
     <nav class="navbar">
         <div class="container">
@@ -64,6 +78,7 @@
         // Initialize stars
         createStars();
     </script>
+    <script src="{{ url_for('static', filename='js/status.js') }}"></script>
     {% block scripts %}{% endblock %}
 </body>
 </html> 

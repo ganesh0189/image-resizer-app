@@ -35,12 +35,16 @@ instance/
 .webassets-cache
 
 # Uploaded files
-app/static/uploads/*
-!app/static/uploads/.gitkeep
+uploads/*
+!uploads/.gitkeep
 
 # Logs
 *.log
 
 # Environment variables
 .env
-.env.local 
+.env.local
+
+# OS specific
+.DS_Store
+Thumbs.db 

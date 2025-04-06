@@ -14,6 +14,13 @@ A modern, user-friendly web application built with Flask that allows users to re
 - Batch processing for multiple images
 - Instant download of resized images
 
+### Image Compression
+- Compress images to reduce file size
+- Specify target file size or quality level
+- Maintain image quality while reducing file size
+- Real-time preview of compressed images
+- Instant download of compressed images
+
 ### PDF Conversion
 - Convert multiple images to a single PDF document
 - Intuitive drag-and-drop interface for image upload
@@ -25,6 +32,7 @@ A modern, user-friendly web application built with Flask that allows users to re
 ### User Interface
 - Modern, responsive design
 - Intuitive navigation
+- Step-by-step process flow
 - About section with application information
 - Creator details and contact information
 - Clean and professional header section
@@ -72,6 +80,7 @@ http://localhost:8080
   - Flask (Web Framework)
   - Pillow (Image Processing)
   - img2pdf (PDF Conversion)
+  - psutil (System Monitoring)
 
 - **Frontend:**
   - HTML5
@@ -91,9 +100,15 @@ https://image-resizer-app.onrender.com
 2. Connect your GitHub repository
 3. Configure the following settings:
    - Build Command: `pip install -r requirements.txt`
-   - Start Command: `python main.py`
+   - Start Command: `gunicorn main:app`
    - Environment: Python 3
 4. Deploy the application
+
+### Git Repository
+The application is available on GitHub at:
+```
+https://github.com/ganesh0189/image-resizer-app
+```
 
 ## 👨‍💻 Creator
 

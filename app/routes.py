@@ -88,66 +88,71 @@ def resize():
 
 @routes_bp.route('/compress', methods=['POST'])
 def compress():
-    if 'file' not in request.files:
-        return jsonify({"error": "No file provided"}), 400
-    
-    file = request.files['file']
-    if file.filename == '':
-        return jsonify({"error": "No file selected"}), 400
-    
-    if not allowed_file(file.filename):
-        return jsonify({"error": "Invalid file type"}), 400
-
     try:
-        target_size_kb = int(request.form['target_size_kb'])
-        if target_size_kb <= 0:
-            return jsonify({"error": "Target size must be positive"}), 400
-    except ValueError:
-        return jsonify({"error": "Invalid target size"}), 400
+        if 'file' not in request.files:
+            return jsonify({"error": "No file provided"}), 400
+        
+        file = request.files['file']
+        if file.filename == '':
+            return jsonify({"error": "No file selected"}), 400
+        
+        if not allowed_file(file.filename):
+            return jsonify({"error": "Invalid file type"}), 400
 
-    user_quality = request.form.get('quality')
-    if user_quality:
         try:
-            user_quality = int(user_quality)
-            if not 1 <= user_quality <= 100:
-                return jsonify({"error": "Quality must be between 1 and 100"}), 400
-        except ValueError:
-            return jsonify({"error": "Invalid quality value"}), 400
+            target_size_kb = int(request.form.get('target_size_kb', 0))
+            if target_size_kb <= 0:
+                return jsonify({"error": "Target size must be positive"}), 400
+        except (ValueError, TypeError):
+            return jsonify({"error": "Invalid target size"}), 400
 
-    filename = secure_filename(file.filename)
-    input_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
-    file.save(input_path)
+        user_quality = request.form.get('quality')
+        if user_quality:
+            try:
+                user_quality = int(user_quality)
+                if not 1 <= user_quality <= 100:
+                    return jsonify({"error": "Quality must be between 1 and 100"}), 400
+            except (ValueError, TypeError):
+                return jsonify({"error": "Invalid quality value"}), 400
 
-    try:
-        # Get original file size
-        original_size = os.path.getsize(input_path)
-        
-        # Compress the image
-        output_path = compress_image(input_path, target_size_kb, user_quality, current_app.config['UPLOAD_FOLDER'])
-        
-        # Get new file size
-        new_size = os.path.getsize(output_path)
-        
-        # Calculate reduction percentage
-        reduction = round((1 - (new_size / original_size)) * 100, 2)
-        
-        # Get the basename of the output file (it already has the compressed_ prefix from compress_image)
-        result_filename = os.path.basename(output_path)
-        
-        # Return JSON with file details
-        return jsonify({
-            "preview_url": url_for('routes.get_image', filename=result_filename),
-            "download_url": url_for('routes.download_image', filename=result_filename),
-            "original_size": original_size,
-            "new_size": new_size,
-            "reduction": reduction
-        })
+        filename = secure_filename(file.filename)
+        input_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+        file.save(input_path)
+
+        try:
+            # Get original file size
+            original_size = os.path.getsize(input_path)
+            
+            # Compress the image
+            output_path = compress_image(input_path, target_size_kb, user_quality, current_app.config['UPLOAD_FOLDER'])
+            
+            # Get new file size
+            new_size = os.path.getsize(output_path)
+            
+            # Calculate reduction percentage
+            reduction = round((1 - (new_size / original_size)) * 100, 2)
+            
+            # Get the basename of the output file
+            result_filename = os.path.basename(output_path)
+            
+            # Return JSON with file details
+            return jsonify({
+                "preview_url": url_for('routes.get_image', filename=result_filename),
+                "download_url": url_for('routes.download_image', filename=result_filename),
+                "original_size": original_size,
+                "new_size": new_size,
+                "reduction": reduction
+            })
+        except Exception as e:
+            current_app.logger.error(f"Error processing image: {str(e)}")
+            return jsonify({"error": "Error processing image"}), 500
+        finally:
+            # Clean up input file
+            if os.path.exists(input_path):
+                os.remove(input_path)
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
-    finally:
-        # Clean up input file
-        if os.path.exists(input_path):
-            os.remove(input_path)
+        current_app.logger.error(f"Unexpected error: {str(e)}")
+        return jsonify({"error": "An unexpected error occurred"}), 500
 
 @routes_bp.route('/image/<filename>')
 def get_image(filename):

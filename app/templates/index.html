@@ -32,11 +32,6 @@
         </div>
     </div>
 
-    <header class="header">
-        <h1 class="title">Image Tools</h1>
-        <p class="subtitle">Free online tools for image manipulation</p>
-    </header>
-
     <div class="features-container">
         <div id="resize-card" class="feature-card">
             <i class="fas fa-expand feature-icon"></i>
@@ -81,9 +76,9 @@
             <h2>Created by</h2>
             <div class="creator-name">Ganesh Bollem</div>
             <div class="creator-links">
-                <a href="mailto:ganesh.bollem@gmail.com" class="creator-link">
+                <a href="mailto:ganeshbollem0189@gmail.com" class="creator-link">
                     <i class="fas fa-envelope"></i>
-                    <span>ganesh.bollem@gmail.com</span>
+                    <span>ganeshbollem0189@gmail.com</span>
                 </a>
                 <a href="https://github.com/ganesh0189" class="creator-link" target="_blank">
                     <i class="fab fa-github"></i>
@@ -140,28 +135,41 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeButtons = document.querySelectorAll('.close-modal');
     const resultModal = document.querySelector('.result-modal');
 
-    resizeCard.addEventListener('click', () => {
-        resizeModal.style.display = 'flex';
-    });
+    // Check if elements exist before adding event listeners
+    if (resizeCard && resizeModal) {
+        resizeCard.addEventListener('click', () => {
+            resizeModal.style.display = 'flex';
+        });
+    }
 
-    pdfCard.addEventListener('click', () => {
-        pdfModal.style.display = 'flex';
-    });
+    if (pdfCard && pdfModal) {
+        pdfCard.addEventListener('click', () => {
+            pdfModal.style.display = 'flex';
+        });
+    }
 
     closeButtons.forEach(button => {
         button.addEventListener('click', (e) => {
             e.preventDefault();
             const modalId = button.getAttribute('data-modal');
-            document.getElementById(modalId).style.display = 'none';
-            
-            // If closing the result modal, clear the form
-            if (modalId === 'resize-modal') {
-                const form = resizeModal.querySelector('form');
-                if (form) form.reset();
-                const previewContainer = resizeModal.querySelector('.preview-container');
-                if (previewContainer) previewContainer.style.display = 'none';
-                const uploadArea = resizeModal.querySelector('.upload-area');
-                if (uploadArea) uploadArea.style.display = 'flex';
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+                
+                // If closing the result modal, clear the form
+                if (modalId === 'resize-modal') {
+                    const form = resizeModal.querySelector('form');
+                    if (form) form.reset();
+                    
+                    // Handle file info display
+                    const fileInfo = resizeModal.querySelector('.file-info');
+                    const uploadArea = resizeModal.querySelector('.upload-area');
+                    const removeFileBtn = resizeModal.querySelector('.remove-file');
+                    
+                    if (fileInfo) fileInfo.style.display = 'none';
+                    if (uploadArea) uploadArea.style.display = 'flex';
+                    if (removeFileBtn) removeFileBtn.style.display = 'none';
+                }
             }
         });
     });

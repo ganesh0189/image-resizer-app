@@ -2,7 +2,9 @@ import os
 from flask import Flask
 from flask_cors import CORS
 from app.config import Config
-from app.routes import init_routes
+from app.routes import routes_bp
+from app.status_routes import status_bp
+from app.system_monitor import system_monitor
 
 def create_app(config_class=Config):
     app = Flask(__name__,
@@ -17,8 +19,12 @@ def create_app(config_class=Config):
     app.config['DEBUG'] = False
     app.config['TESTING'] = False
     
-    # Initialize routes and error handlers
-    init_routes(app)
+    # Register blueprints
+    app.register_blueprint(routes_bp)
+    app.register_blueprint(status_bp)
+    
+    # Start system monitoring
+    system_monitor.start_monitoring()
     
     # Ensure the uploads directory exists
     if not os.path.exists(app.config['UPLOAD_FOLDER']):

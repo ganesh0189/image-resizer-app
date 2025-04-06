@@ -51,20 +51,39 @@ form.addEventListener('submit', async (e) => {
     
     try {
         const formData = new FormData(form);
+        
+        // Validate form data
+        const file = formData.get('file');
+        if (!file || file.size === 0) {
+            throw new Error('Please select a file');
+        }
+        
+        const targetSize = formData.get('target_size_kb');
+        if (!targetSize || isNaN(targetSize) || parseInt(targetSize) <= 0) {
+            throw new Error('Please enter a valid target size');
+        }
+        
         const response = await fetch(form.action, {
             method: 'POST',
             body: formData
         });
         
-        const result = await response.json();
+        let result;
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+            result = await response.json();
+        } else {
+            throw new Error('Server returned an invalid response');
+        }
         
         if (response.ok) {
             showResultModal(result);
         } else {
-            alert(result.error || 'An error occurred');
+            throw new Error(result.error || 'An error occurred while processing your request');
         }
     } catch (error) {
-        alert('An error occurred while processing your request');
+        console.error('Error:', error);
+        alert(error.message || 'An error occurred while processing your request');
     } finally {
         // Reset loading state
         submitButton.classList.remove('loading');

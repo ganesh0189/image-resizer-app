@@ -17,4 +17,8 @@ services:
       - key: FLASK_APP
         value: main.py
       - key: SECRET_KEY
-        value: 678bcbacb43b90dfa4e0962f9cf1535b66be277b3ffd66094988eb0b56d93e31 
+        generateValue: true
+      - key: PORT
+        value: 10000
+    healthCheckPath: /
+    autoDeploy: true 
