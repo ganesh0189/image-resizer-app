@@ -5,6 +5,7 @@ import img2pdf
 from app.utils import resize_image, compress_image
 from werkzeug.utils import secure_filename
 import time
+import shutil
 
 routes_bp = Blueprint('routes', __name__)
 
@@ -244,7 +245,10 @@ def convert_to_pdf():
             if os.path.exists(path):
                 os.remove(path)
         if os.path.exists(temp_dir):
-            os.rmdir(temp_dir)
+            try:
+                shutil.rmtree(temp_dir)
+            except Exception as e:
+                current_app.logger.error(f"Error removing temp directory: {e}")
         
         # Get file size
         file_size = os.path.getsize(output_path)

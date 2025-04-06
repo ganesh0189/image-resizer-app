@@ -2,6 +2,7 @@ import os
 import psutil
 import time
 import threading
+import shutil
 from collections import deque
 
 class SystemMonitor:
@@ -54,16 +55,17 @@ class SystemMonitor:
                 current_time = time.time()
                 for filename in os.listdir(upload_dir):
                     file_path = os.path.join(upload_dir, filename)
-                    # Skip directories
-                    if os.path.isfile(file_path):
-                        # Check if file is older than 1 hour
-                        if current_time - os.path.getmtime(file_path) > 3600:
-                            try:
+                    # Check if file is older than 1 hour
+                    if current_time - os.path.getmtime(file_path) > 3600:
+                        try:
+                            if os.path.isfile(file_path):
                                 os.remove(file_path)
-                            except Exception:
-                                pass  # Ignore errors during cleanup
-        except Exception:
-            pass  # Ignore errors during cleanup
+                            elif os.path.isdir(file_path):
+                                shutil.rmtree(file_path)
+                        except Exception as e:
+                            print(f"Error cleaning up {file_path}: {e}")
+        except Exception as e:
+            print(f"Error during cleanup: {e}")
     
     def get_system_status(self):
         """Get the current system status"""
